@@ -3,7 +3,7 @@ Data Access Layer (DAL) library class # SqlDataAccess using Dapper(micro-ORMs) i
 
 You can create an instance of the SqlDataAccess class with the connection string and reuse it throughout your application without having to pass the connection string every time you call the LoadData or PersistData methods.
 
-Below is are examples of how to use the # SqlDataAccess class :
+Below is a # UserRepository class with examples of how to use the # SqlDataAccess class in DALLibrary above :
 
 
 ```C#
