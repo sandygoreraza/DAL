@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DALLibrary
 {
-    public class UserModel
+    public class User
     {
 
         public int Id { get; set; }
