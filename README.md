@@ -8,12 +8,51 @@ Below is are examples of how to use the # SqlDataAccess class :
 
 ```C#
 
-string connectionString = "your_connection_string_here";
-SqlDataAccess sqlDataAccess = new SqlDataAccess(connectionString);
+using DALLibrary;
 
-List<MyDataModel> data = sqlDataAccess.LoadData<MyDataModel, dynamic>("SELECT * FROM MyTable", null);
+namespace DataAccessExample
+{
 
+    public class UserRepository
+    {
+        private readonly SqlDataAccess _dataAccess;
 
-sqlDataAccess.PersistData("INSERT INTO MyTable (Column1, Column2) VALUES (@Column1, @Column2)", new { Column1 = "Value1", Column2 = "Value2" });
+        public UserRepository(string connectionString)
+        {
+            _dataAccess = new SqlDataAccess(connectionString);
+        }
+
+        public List<User> GetAllUsers()
+        {
+            string sql = "SELECT * FROM Users";
+            return _dataAccess.LoadData<User, dynamic>(sql, new { });
+        }
+
+        public User GetUserById(int id)
+        {
+            string sql = "SELECT * FROM Users WHERE Id = @Id";
+            return _dataAccess.LoadData<User, dynamic>(sql, new { Id = id }).FirstOrDefault();
+        }
+
+        public void InsertUser(User user)
+        {
+            string sql = "INSERT INTO Users (Name, Email) VALUES (@Name, @Email)";
+            _dataAccess.PersistData(sql, user);
+        }
+
+        public void UpdateUser(User user)
+        {
+            string sql = "UPDATE Users SET Name = @Name, Email = @Email WHERE Id = @Id";
+            _dataAccess.PersistData(sql, user);
+        }
+
+        public void DeleteUser(int id)
+        {
+            string sql = "DELETE FROM Users WHERE Id = @Id";
+            _dataAccess.PersistData(sql, new { Id = id });
+        }
+    }
+}
+
 ```
 
