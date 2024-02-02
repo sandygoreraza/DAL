@@ -1,4 +1,4 @@
-# DAL
+# DAL (Data Access Layer)
 Data Access Layer (DAL) library class # SqlDataAccess using Dapper(micro-ORMs) in C#.
 
 You can create an instance of the SqlDataAccess class with the connection string and reuse it throughout your application without having to pass the connection string every time you call the LoadData or PersistData methods.
