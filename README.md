@@ -29,7 +29,7 @@ namespace DataAccessExample
             return _dataAccess.LoadData<UserModel, dynamic>(sql, new { });
         }
 
-        public User GetUserById(int id)
+        public UserModel GetUserById(int id)
         {
             string sql = "SELECT * FROM Users WHERE Id = @Id";
             return _dataAccess.LoadData<UserModel, dynamic>(sql, new { Id = id }).FirstOrDefault();
