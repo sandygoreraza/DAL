@@ -23,7 +23,7 @@ namespace DataAccessExample
             _dataAccess = new SqlDataAccess(connectionString);
         }
 
-        public List<User> GetAllUsers()
+        public List<UserModel> GetAllUsers()
         {
             string sql = "SELECT * FROM Users";
             return _dataAccess.LoadData<UserModel, dynamic>(sql, new { });
