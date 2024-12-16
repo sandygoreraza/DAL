@@ -6,7 +6,7 @@ You can create an instance of the SqlDataAccess class with the connection string
 Below is # database bindings defined in the program.cs and # UserRepository class with examples of how to use the # SqlDataAccess class in DALLibrary above :
 
 
-# Connection dependencies** - NB: dont forget to include necessary libraries for each database type defined below
+# Database bindings** - NB: dont forget to include necessary libraries for each database type defined below
 
 ```C#
 var connectionString = builder.Configuration.GetConnectionString("DBConnection");
