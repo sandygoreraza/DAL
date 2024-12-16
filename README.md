@@ -3,8 +3,37 @@ Data Access Layer (DAL) library class # SqlDataAccess using Dapper(micro-ORMs) i
 
 You can create an instance of the SqlDataAccess class with the connection string and reuse it throughout your application without having to pass the connection string every time you call the LoadData or PersistData methods.
 
-Below is a # UserRepository class with examples of how to use the # SqlDataAccess class in DALLibrary above :
+Below is # database bindings defined in the program.cs and # UserRepository class with examples of how to use the # SqlDataAccess class in DALLibrary above :
 
+
+#Connection dependencies - NB: dont forget to include necessary libraries for each database type defined below
+
+```C#
+var connectionString = builder.Configuration.GetConnectionString("DBConnection");
+
+var dbType = builder.Configuration.GetValue<string>("DatabaseType"); // e.g., "MySql", "SqlServer", "PostgreSql" defined in your appsettings.json like this { "DatabaseType": "MySql" }
+
+
+///bind connectionString
+builder.Services.AddDbContext<MeetingsDBContext>(options =>
+{
+    switch (dbType)
+    {
+        case "MySql":
+            options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            break;
+        case "SqlServer":
+            options.UseSqlServer(connectionString);
+            break;
+        case "PostgreSql":
+            options.UseNpgsql(connectionString);
+            break;
+        default:
+            throw new NotSupportedException($"Database type '{dbType}' is not supported.");
+    }
+});
+
+```
 
 # Without Relationship with other tables
 ```C#
